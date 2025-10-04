@@ -46,7 +46,11 @@
         <ul class="navbar-nav mr-auto">
           <li class="nav-item px-4">
             <a class="nav-link btn secondary" id="link--active"
-              style="font-family:'Lucida Sans', font-weight:bold, 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; color:#003333;"
+              style="font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 
+          'Lucida Sans Unicode', Geneva, Verdana, sans-serif; 
+          font-weight: bold; 
+          color: #003333; 
+          text-decoration: none;"
               href="#">
               STOP WATCH
             </a>
@@ -152,6 +156,31 @@
     document.addEventListener("keyup", (event) => {
       if (event.code === "Numpad0") {
         clearLap();
+      }
+    });
+
+    // P key for Start/Stop
+    document.addEventListener("keyup", (event) => {
+      if (event.code === "KeyP") {
+        start();
+      }
+    });
+
+    // R key for Reset
+    document.addEventListener("keyup", (event) => {
+      if (event.code === "KeyR") {
+        reset();
+      }
+    });
+
+    // K key for Play/Pause music
+    document.addEventListener("keyup", (event) => {
+      if (event.code === "KeyK") {
+        if (audio.paused) {
+          audio.play();
+        } else {
+          audio.pause();
+        }
       }
     });
   </script>
