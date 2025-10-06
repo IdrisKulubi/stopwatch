@@ -30,12 +30,21 @@
 </head>
 
 <body>
+  <!-- Video Background -->
+  <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -999;">
+    <video width="100%" height="100%" autoplay muted loop style="object-fit: cover;">
+      <source src="lofi.mp4" type="video/mp4">
+    </video>
+  </div>
+  
+  <!-- Video Overlay for Dark Mode -->
+  <div class="video-overlay" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.3); z-index: -998;"></div>
 
-  <nav class="navbar navbar-default  navbar-expand-lg  bg-white thinner navcol">
-    <div class="container-fluid">
+  <nav class="navbar navbar-default navbar-expand-lg thinner navcol">
+    <div class="container-fluid-nav">
         <div class="maintitle">
           <img src="./img/logo.gif"
-            style="height: 3rem; width: 3rem;margin-right:1rem; font-weight:bold" alt=""> <span id="title1">Stop Watch</span>
+            style="height: 3rem; width: 3rem;margin-right:1rem; font-weight:bold; border-radius: 50%;" alt=""> <span id="title1" >Stop Watch</span>
         </div>
       <button class="navbar-toggler" style="background-color: rgb(77, 123, 247);" type="button"
         data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
@@ -80,6 +89,15 @@
   </nav>
   <div class="container-fluid">
     <div id="container">
+      <div id="mode-toggle">
+        <button id="stopwatch-btn" class="mode-btn active">Stopwatch</button>
+        <button id="countdown-btn" class="mode-btn">Countdown Timer</button>
+      </div>
+
+      <div id="countdown-input-container" style="display: none; margin: 10px 0;">
+        <input type="number" id="countdown-minutes" placeholder="Minutes" min="0" style="width: 100px; padding:5px;">
+        <button class="buttons" id="start-countdown">Start Countdown</button>
+      </div>
       <div>
         <div id="time">
           <span>
@@ -137,52 +155,43 @@
 
   <script type="text/javascript">
     // start or stop stopwatch using "spacebar" key
-    document.addEventListener("keyup", (event) => {
+    document.addEventListener("keydown", (event) => {
       if (event.code === "Space") {
+        event.preventDefault();
         start();
       }
     });
-    document.addEventListener("keyup", (event) => {
+    document.addEventListener("keydown", (event) => {
       if (event.code === "Backspace") {
         reset();
       }
     });
-    document.addEventListener("keyup", (event) => {
+    document.addEventListener("keydown", (event) => {
       if (event.code === "Enter") {
         lap();
       }
     });
 
-    document.addEventListener("keyup", (event) => {
+    document.addEventListener("keydown", (event) => {
       if (event.code === "Numpad0") {
         clearLap();
       }
     });
 
     // P key for Start/Stop
-    document.addEventListener("keyup", (event) => {
+    document.addEventListener("keydown", (event) => {
       if (event.code === "KeyP") {
         start();
       }
     });
 
     // R key for Reset
-    document.addEventListener("keyup", (event) => {
+    document.addEventListener("keydown", (event) => {
       if (event.code === "KeyR") {
         reset();
       }
     });
 
-    // K key for Play/Pause music
-    document.addEventListener("keyup", (event) => {
-      if (event.code === "KeyK") {
-        if (audio.paused) {
-          audio.play();
-        } else {
-          audio.pause();
-        }
-      }
-    });
   </script>
   <script src="script.js"></script>
 
@@ -190,7 +199,7 @@
   <footer>
     <div class="container-fluid my-class foot">
       <div class="container">
-        <p class="textfooter" style="margin-top: 2rem;">Made with 💝 by Avinash Singh</p>
+        <p class="textfooter" style="margin-top: 2rem;">Made with <span class="heart">❤️</span> by Avinash Singh</p>
 
         <div>
           <ul style="color: white" class="social-links">
@@ -212,6 +221,8 @@
     </div>
     </container>
   </footer>
+  
+  <div id="confetti"></div>
 </body>
 
 </html>
